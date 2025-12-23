@@ -5,4 +5,4 @@ favicon_io
 build
 dist
 run_app.py
-run_app.spec
+**.spec
