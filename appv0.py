@@ -13,7 +13,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🌿 Li-Cor 6800 Photosynthesis Data Analyzer")
+st.title("🌿 Li-Cor 6800 Data Visualizer")
 
 # =============================================================================
 # Session state
