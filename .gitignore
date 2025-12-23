@@ -1,2 +1,8 @@
 env
+favicon_io
+*.ico
 **.xlsx
+build
+dist
+run_app.py
+run_app.spec
