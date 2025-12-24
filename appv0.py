@@ -50,7 +50,6 @@ def detect_time_column(df):
             return c
     return None
 
-
 # =============================================================================
 # Data loader
 # =============================================================================
@@ -81,7 +80,6 @@ def load_data(file):
     df.columns = make_unique(df.columns)
 
     return df, units
-
 
 # =============================================================================
 # App
@@ -141,6 +139,30 @@ if uploaded:
     fig_title = st.sidebar.text_input("Figure title")
     caption = st.sidebar.text_area("Figure caption")
 
+    # ---- Y-axis range controls (new)
+    st.sidebar.header("Y-axis range (optional)")
+
+    y_left_min = st.sidebar.number_input(
+        f"Left Y-axis ({y_left}) min",
+        value=float(df_f[y_left].min()),
+        step=0.1
+    )
+    y_left_max = st.sidebar.number_input(
+        f"Left Y-axis ({y_left}) max",
+        value=float(df_f[y_left].max()),
+        step=0.1
+    )
+    y_right_min = st.sidebar.number_input(
+        f"Right Y-axis ({y_right}) min",
+        value=float(df_f[y_right].min()),
+        step=0.1
+    )
+    y_right_max = st.sidebar.number_input(
+        f"Right Y-axis ({y_right}) max",
+        value=float(df_f[y_right].max()),
+        step=0.1
+    )
+
     # ---- Vertical lines
     st.sidebar.subheader("Vertical lines (OBS-based)")
 
@@ -170,7 +192,6 @@ if uploaded:
     # =============================================================================
     # Plot
     # =============================================================================
-
 
     # =============================================================================
     # Figure font & layout constants (adjust freely)
@@ -247,10 +268,12 @@ if uploaded:
         showgrid=False
     )
 
+    # ---- Apply user-controlled Y-axis ranges
     fig.update_yaxes(
         title_text=f"{y_left} ({units.get(y_left, '')})",
         title_font=dict(size=AXIS_LABEL_FONT_SIZE),
         tickfont=dict(size=TICK_FONT_SIZE),
+        range=[y_left_min, y_left_max],
         secondary_y=False,
         showgrid=False
     )
@@ -259,6 +282,7 @@ if uploaded:
         title_text=f"{y_right} ({units.get(y_right, '')})",
         title_font=dict(size=AXIS_LABEL_FONT_SIZE),
         tickfont=dict(size=TICK_FONT_SIZE),
+        range=[y_right_min, y_right_max],
         secondary_y=True,
         showgrid=False
     )
