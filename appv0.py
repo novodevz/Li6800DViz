@@ -170,6 +170,22 @@ if uploaded:
     # =============================================================================
     # Plot
     # =============================================================================
+
+
+    # =============================================================================
+    # Figure font & layout constants (adjust freely)
+    # =============================================================================
+    TITLE_FONT_SIZE = 30
+    AXIS_LABEL_FONT_SIZE = 28
+    TICK_FONT_SIZE = 20
+    LEGEND_FONT_SIZE = 24
+    CAPTION_FONT_SIZE = 20
+
+    PADDING_TOP = 80
+    PADDING_BOTTOM = 140
+    PADDING_LEFT = 90
+    PADDING_RIGHT = 90
+
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
     fig.add_trace(
@@ -219,19 +235,32 @@ if uploaded:
             x=0,
             y=-0.25,
             showarrow=False,
-            align="left"
+            align="left",
+            font=dict(size=CAPTION_FONT_SIZE)
         )
 
-    fig.update_xaxes(title_text="Time (Jerusalem)", tickformat="%H:%M:%S")
+    fig.update_xaxes(
+        title_text="Time",
+        tickformat="%H:%M:%S",
+        title_font=dict(size=AXIS_LABEL_FONT_SIZE),
+        tickfont=dict(size=TICK_FONT_SIZE),
+        showgrid=False
+    )
 
     fig.update_yaxes(
         title_text=f"{y_left} ({units.get(y_left, '')})",
-        secondary_y=False
+        title_font=dict(size=AXIS_LABEL_FONT_SIZE),
+        tickfont=dict(size=TICK_FONT_SIZE),
+        secondary_y=False,
+        showgrid=False
     )
 
     fig.update_yaxes(
         title_text=f"{y_right} ({units.get(y_right, '')})",
-        secondary_y=True
+        title_font=dict(size=AXIS_LABEL_FONT_SIZE),
+        tickfont=dict(size=TICK_FONT_SIZE),
+        secondary_y=True,
+        showgrid=False
     )
 
     # 🔹 REMOVE GRID LINES
@@ -239,10 +268,23 @@ if uploaded:
     fig.update_yaxes(showgrid=False)
 
     fig.update_layout(
-        title=fig_title,
+        title=dict(
+            text=fig_title,
+            x=0.5,                 # center title
+            xanchor="center",
+            font=dict(size=TITLE_FONT_SIZE)
+        ),
+        legend=dict(
+            font=dict(size=LEGEND_FONT_SIZE)
+        ),
         hovermode="x unified",
         height=700,
-        margin=dict(b=120)
+        margin=dict(
+            t=PADDING_TOP,
+            b=PADDING_BOTTOM,
+            l=PADDING_LEFT,
+            r=PADDING_RIGHT
+        )
     )
 
     # ---- Auto PNG filename
