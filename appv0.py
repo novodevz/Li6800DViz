@@ -262,7 +262,7 @@ if uploaded:
 
     fig.update_xaxes(
         title_text="Time",
-        tickformat="%H:%M:%S",
+        tickformat="%H:%M",
         title_font=dict(size=AXIS_LABEL_FONT_SIZE),
         tickfont=dict(size=TICK_FONT_SIZE),
         showgrid=False
